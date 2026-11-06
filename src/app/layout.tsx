@@ -27,10 +27,22 @@ const tamil = Noto_Serif_Tamil({
 export const metadata: Metadata = {
   title: `${brand.name} | ${brand.tagline}`,
   description: `${brand.name}: silk, soft silk, Banarasi and cotton sarees. Handpicked for weddings, festivals and every day.`,
+  // Absolute base for link-preview URLs (Instagram, WhatsApp…). Without it Next.js uses
+  // Vercel's default project domain, which may not serve the site.
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://clothing-demo-ecom.vercel.app"),
   openGraph: {
+    type: "website",
+    url: "/",
+    siteName: brand.name,
     title: brand.name,
     description: brand.tagline,
-    images: [{ url: brand.logo.full, width: 800, height: 800 }],
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: `${brand.name} logo` }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: brand.name,
+    description: brand.tagline,
+    images: ["/og-image.jpg"],
   },
 };
 
