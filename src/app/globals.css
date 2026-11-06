@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Header height is fixed in CSS so the page lays out correctly from the very first
+     paint (no gap/flash while JavaScript loads). Keep in sync with Header.tsx. */
+  --header-h: 76px;
+}
+@media (min-width: 640px) {
+  :root { --header-h: 88px; }
+}
+
+body {
+  @apply bg-ivory text-ink-soft font-sans antialiased;
+}
+
+h1, h2, h3, h4 {
+  @apply font-serif text-ink;
+}
+
+/* Primary CTA button — refined solid deep-green, cohesive with the mint palette */
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 rounded-full bg-mint-deep px-6 py-3 text-sm font-semibold tracking-wide text-white transition-all duration-300;
+  box-shadow: 0 6px 18px -8px rgba(74, 44, 31, 0.55);
+}
+.btn-primary:hover {
+  @apply bg-[#36200f];
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px -10px rgba(74, 44, 31, 0.7);
+}
+
+/* Backwards-compatible alias so existing markup keeps working */
+.btn-gold { @apply btn-primary; }
+
+.btn-outline {
+  @apply inline-flex items-center justify-center gap-2 rounded-full border border-mint-deep px-6 py-3 text-sm font-semibold tracking-wide text-mint-deep transition-colors duration-300 hover:bg-mint-deep hover:text-white;
+}
+
+/* Silk-saree magenta CTA */
+.btn-silk {
+  @apply inline-flex items-center justify-center gap-2 rounded-full bg-silk px-6 py-3 text-sm font-semibold tracking-wide text-white transition-all duration-300 hover:bg-silk-deep;
+  box-shadow: 0 8px 22px -10px rgba(142, 27, 85, 0.7);
+}
+.btn-silk:hover { transform: translateY(-1px); }
+
+.eyebrow {
+  @apply text-xs font-semibold uppercase tracking-[0.22em] text-gold-dark;
+}
+
+.section-title {
+  @apply text-center font-serif text-3xl md:text-4xl text-ink;
+}
+
+.container-x {
+  @apply mx-auto w-full max-w-[1400px] px-4 sm:px-6 lg:px-10;
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+.shimmer { position: relative; overflow: hidden; background: #efefef; }
+.shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+  animation: shimmer 1.4s infinite;
+}
+@keyframes shimmer { 100% { transform: translateX(100%); } }
+
+/* Phones: hide the floating WhatsApp button while the home story is on screen
+   (it would cover the story's text card, which has its own WhatsApp buttons). */
+@media (max-width: 1023px) {
+  html[data-story] .wa-float { opacity: 0; pointer-events: none; transform: scale(0.8); }
+}
+.wa-float { transition: opacity 0.3s, transform 0.3s; }
